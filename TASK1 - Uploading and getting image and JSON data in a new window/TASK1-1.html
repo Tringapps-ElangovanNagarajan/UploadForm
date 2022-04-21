@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TASK1-1</title>
+</head>
+<body >
+    <div class="container">
+        <form id="form" action="./TASK1-2.html" target="_blank" method="get">
+        <div class="Container1">
+            <input type="file" id="image" name="image" required accept="image/*">
+        </div>
+        <div class="Container1">
+            <input type="file" id="details" name="details" required accept=".json">
+        </div>
+        <div class="sumbit">
+          <input type="submit" id="submit" >
+        </div>        
+    </form>
+    </div>  
+    <script>
+        document.querySelector("#image").addEventListener("change",function(){
+    const imgReader=new FileReader();  
+    
+    imgReader.addEventListener("load",function(){
+    localStorage.setItem("presentimage", imgReader.result);
+    }); 
+    
+    imgReader.readAsDataURL(this.files[0]);
+    
+    });
+    document.querySelector("#details").addEventListener("change", function() {
+      var myFile = document.getElementById("details").files[0];
+      var fileReader = new FileReader();
+      fileReader.onload = function(e) {
+        var detail = e.target.result;
+        var data = JSON.parse(detail); 
+        window.localStorage.setItem("myObject", JSON.stringify(data));
+      };
+      fileReader.readAsText(myFile);
+    });
+    </script>
+</body>
+</html>
